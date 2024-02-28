@@ -1,31 +1,28 @@
-import { StyleSheet } from "react-native";
-
-import EditScreenInfo from "@/components/EditScreenInfo";
-import { Text, View } from "@/components/Themed";
+import { View } from "@/components/core/Themed";
+import HomeBackground from "@/components/home/HomeBackground";
+import HomeFeaturedArticle from "@/components/home/HomeFeaturedArticle";
+import HomeHeader from "@/components/home/HomeHeader";
+import Section from "@/components/shared/Section";
+import { SCPObjectClass } from "@/constants/Models";
+import { Tabs } from "expo-router";
 
 export default function TabOneScreen() {
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Wow. That was pretty fast</Text>
-            <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-            <EditScreenInfo path="app/(tabs)/index.tsx" />
+        <View style={{ flex: 1 }}>
+            <Tabs.Screen options={{ headerShown: false }} />
+            <HomeBackground>
+                <HomeHeader style={{ paddingHorizontal: 24, marginBottom: 32 }} />
+                <Section label="Featured SCPs" style={{ paddingHorizontal: 24 }}>
+                    <View style={{ paddingHorizontal: 24, flexDirection: "row" }}>
+                        <HomeFeaturedArticle
+                            name="SCP-131"
+                            index="131"
+                            objectClass={SCPObjectClass.Safe}
+                            description="No special safety procedures are to be taken with SCP-131-A and SCP-131-B."
+                        ></HomeFeaturedArticle>
+                    </View>
+                </Section>
+            </HomeBackground>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: "bold",
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: "80%",
-    },
-});

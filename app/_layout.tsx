@@ -6,6 +6,20 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 
 import { useColorScheme } from "@/components/useColorScheme";
+import {
+    JosefinSans_400Regular,
+    JosefinSans_400Regular_Italic,
+    JosefinSans_500Medium,
+    JosefinSans_500Medium_Italic,
+    JosefinSans_700Bold,
+    JosefinSans_700Bold_Italic,
+} from "@expo-google-fonts/josefin-sans";
+import {
+    Lato_400Regular,
+    Lato_400Regular_Italic,
+    Lato_700Bold,
+    Lato_700Bold_Italic,
+} from "@expo-google-fonts/lato";
 
 export {
     // Catch any errors thrown by the Layout component.
@@ -21,8 +35,19 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+    // TODO: These could be embedded statically
+    // https://docs.expo.dev/develop/user-interface/fonts/#embed-font-in-a-native-project
     const [loaded, error] = useFonts({
-        SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+        Josefin: JosefinSans_400Regular,
+        JosefinItalic: JosefinSans_400Regular_Italic,
+        JosefinBold: JosefinSans_700Bold,
+        JosefinBoldItalic: JosefinSans_700Bold_Italic,
+        JosefinMedium: JosefinSans_500Medium,
+        JosefinMediumItalic: JosefinSans_500Medium_Italic,
+        Lato: Lato_400Regular,
+        LatoItalic: Lato_400Regular_Italic,
+        LatoBold: Lato_700Bold,
+        LatoBoldItalic: Lato_700Bold_Italic,
         ...FontAwesome.font,
     });
 
