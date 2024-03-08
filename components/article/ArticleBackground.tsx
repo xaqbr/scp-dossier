@@ -3,9 +3,16 @@ import { LinearGradient } from "expo-linear-gradient";
 import { PropsWithChildren } from "react";
 import { ImageBackground } from "react-native";
 
-export default function HomeBackground(props: PropsWithChildren<{}>) {
+export type ArticleBackgroundProps = {
+    backgroundUrl?: string;
+};
+
+export default function ArticleBackground(props: PropsWithChildren<ArticleBackgroundProps>) {
     return (
-        <ImageBackground style={{ flex: 1 }} source={require("@/assets/images/background.png")}>
+        <ImageBackground
+            style={{ flex: 1 }}
+            source={props.backgroundUrl ? { uri: props.backgroundUrl } : undefined}
+        >
             <ImageBackground
                 style={{ flex: 1 }}
                 source={require("@/assets/images/grid.png")}

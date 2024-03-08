@@ -1,54 +1,55 @@
 import { SCPObjectClassColors } from "@/constants/Colors";
-import { SCPObjectClass } from "@/constants/Models";
+import { ArticleIndex } from "@/constants/Models";
 import { LinearGradient } from "expo-linear-gradient";
+import { Link } from "expo-router";
 import { ImageBackground, StyleSheet } from "react-native";
 import { Text } from "../core/Themed";
 
 export type HomeFeaturedArticleProps = {
-    name: string;
-    index: string;
-    description?: string;
-    objectClass: SCPObjectClass;
+    article: ArticleIndex;
 };
 
 export default function HomeFeaturedArticle(props: HomeFeaturedArticleProps) {
     return (
-        <LinearGradient
-            style={[styles.container]}
-            colors={[SCPObjectClassColors[props.objectClass], "transparent"]}
-        >
-            <ImageBackground
-                source={{ uri: "https://scp-wiki.wdfiles.com/local--files/scp-131/131volgun.png" }}
+        <Link href={{ pathname: "/article/[idx]", params: { idx: props.article.index } }}>
+            <LinearGradient
+                style={[styles.container]}
+                colors={[SCPObjectClassColors[props.article.objectClass], "transparent"]}
             >
-                <LinearGradient
-                    style={{
-                        paddingHorizontal: 8,
-                        paddingVertical: 4,
-                        backgroundColor: "rgba(0,0,0,0.7)",
+                <ImageBackground
+                    source={{
+                        uri: "https://scp-wiki.wdfiles.com/local--files/scp-131/131volgun.png",
                     }}
-                    colors={["transparent", "black"]}
                 >
-                    <Text
-                        style={[
-                            styles.classLabel,
-                            { color: SCPObjectClassColors[props.objectClass] },
-                        ]}
+                    <LinearGradient
+                        style={{
+                            paddingHorizontal: 8,
+                            paddingVertical: 4,
+                            backgroundColor: "rgba(0,0,0,0.7)",
+                        }}
+                        colors={["transparent", "black"]}
                     >
-                        {props.objectClass}
-                    </Text>
-                    <Text style={styles.nameLabel}>{props.name}</Text>
+                        <Text
+                            style={[
+                                styles.classLabel,
+                                { color: SCPObjectClassColors[props.article.objectClass] },
+                            ]}
+                        >
+                            {props.article.objectClass}
+                        </Text>
+                        <Text style={styles.nameLabel}>{props.article.title}</Text>
 
-                    <Text style={styles.description}>{props.description}</Text>
-                </LinearGradient>
-            </ImageBackground>
-        </LinearGradient>
+                        <Text style={styles.description}>{props.article.content.slice(0, 64)}</Text>
+                    </LinearGradient>
+                </ImageBackground>
+            </LinearGradient>
+        </Link>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        minWidth: "50%",
-        maxWidth: "50%",
+        width: 140,
         padding: StyleSheet.hairlineWidth,
     },
     classLabel: {

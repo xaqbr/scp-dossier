@@ -76,7 +76,18 @@ function RootLayoutNav() {
         <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
             <Stack>
                 <Stack.Screen name="(tabs)" options={{ headerShown: false, animation: "fade" }} />
-                <Stack.Screen name="modal" options={{ presentation: "modal", animation: "fade" }} />
+                <Stack.Screen
+                    name="article/[idx]"
+                    options={{
+                        presentation: "modal",
+                        animation: "fade_from_bottom",
+                        // NOTE: headerShown must be false in order to properly render splash
+                        // screens when switching views (this sets it statically, I guess). We can
+                        // still set it back dynamically within the component view with the .Screen
+                        // component.
+                        headerShown: false,
+                    }}
+                />
             </Stack>
         </ThemeProvider>
     );
